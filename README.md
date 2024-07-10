@@ -1,10 +1,8 @@
-# nanoproxy-static-static
+# nanoproxy-static
 
-This is a tiny HTTP forward proxy written in Go, for me to gain experience in the Go language.
+This is a tiny HTTP forward proxy written in Go, which accepts all requests and forwards them directly to the origin/target server host which is set by `--target` flag. It performs no caching.
 
-This proxy accepts all requests and forwards them directly to the origin/target server. It performs no caching.
-
-Despite this not being a full proxy implementation, it is blazing fast. In particular it is significantly faster than Squid and slightly faster than Apache's mod_proxy. This demonstrates that Go's built-in HTTP library is of a very high quality and that the Go runtime is quite performant.
+> Despite this not being a full proxy implementation, it is blazing fast. In particular it is significantly faster than Squid and slightly faster than Apache's mod_proxy. This demonstrates that Go's built-in HTTP library is of a very high quality and that the Go runtime is quite performant.
 
 ## Prerequisites
 
@@ -26,7 +24,7 @@ For Mac Apple M1
 CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 go build -o bin/nanoproxy-static-darwin-arm64
 
 chmod +x bin/nanoproxy-static-darwin-arm64
-nohup bin/nanoproxy-static-darwin-arm64 --port 9100 --target example.com:9100 > nanoproxy-static.log 2>&1 &
+nohup bin/nanoproxy-static-darwin-arm64 --port 9100 --target example.com:9100 --verbose > nanoproxy-static.log 2>&1 &
 ```
 
 For Linux
@@ -35,7 +33,7 @@ For Linux
 CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/nanoproxy-static-linux-amd64
 
 chmod +x bin/nanoproxy-static-linux-amd64
-nohup bin/nanoproxy-static-linux-amd64 --port 9100 --target example.com:9100 > nanoproxy-static.log 2>&1 &
+nohup bin/nanoproxy-static-linux-amd64 --port 9100 --target example.com:9100 --verbose > nanoproxy-static.log 2>&1 &
 ```
 
 For Windows
@@ -44,26 +42,34 @@ For Windows
 CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o bin/nanoproxy-static-windows-amd64.exe
 
 chmod +x bin/nanoproxy-static-windows-amd64.exe
-nohup bin/nanoproxy-static-windows-amd64.exe --port 9100 --target example.com:9100 > nanoproxy-static.log 2>&1 &
+nohup bin/nanoproxy-static-windows-amd64.exe --port 9100 --target example.com:9100 --verbose > nanoproxy-static.log 2>&1 &
 ```
 
 Or just run
 
 ```shell
-go run main.go --port 9100 --target example.com:9100
+go run main.go --port 9100 --target example.com:9100 --verbose
 ```
 
 Validate port 9100 is open and open the firewall
 
 ```shell
 ## 查看运行详情，默认是监听8080端口，可通过--port参数指定，例如，本例中指定为9100
-netstat -tunlp | grep 9100
+$ netstat -tunlp | grep 9100
 tcp6       0      0 :::9100                 :::*                    LISTEN      19598/./nanoproxy-static   
 
+## 注意，`+c 50`是指COMMAND列宽度
+$ lsof -i :9100 +c 50
+COMMAND                         PID  USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+nanoproxy-static-darwin-arm64 13293 allen    5u  IPv6 0x730791ba7d146db1      0t0  TCP *:hp-pdl-datastr (LISTEN)
+
 ## 开放端口
-firewall-cmd --zone=public --add-port=9100/tcp --permanent
+$ firewall-cmd --zone=public --add-port=9100/tcp --permanent
 ## 重载配置
-firewall-cmd --reload
+$ firewall-cmd --reload
+
+## 杀掉进程
+$ kill -9 13293
 ```
 
 ## Validation
