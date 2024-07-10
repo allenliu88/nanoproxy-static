@@ -130,12 +130,7 @@ func handleFunc(w http.ResponseWriter, r *http.Request) {
 	if resp.ContentLength > 0 {
 		// (Ignore I/O errors, since there's nothing we can do)
 		io.CopyN(w, resp.Body, resp.ContentLength)
-	} else /**if resp.Close**/ { // TODO: Is this condition right? No, fixed by allen.liu@2024-7-10 remove the [if resp.Close], resp.ContentLength may be -1 represent Unkonw
-		// Copy until EOF or some other error occurs
-		for {
-			if _, err := io.Copy(w, resp.Body); err != nil {
-				break
-			}
-		}
+	} else {
+		io.Copy(w, resp.Body)
 	}
 }

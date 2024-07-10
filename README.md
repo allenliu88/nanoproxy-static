@@ -77,7 +77,42 @@ $ kill -9 13293
 请求转发验证：
 
 ```shell
-curl 1.1.1.1:9100/metrics
+curl localhost:9100/metrics
 ```
 
-其中，`1.1.1.1`是`nanoproxy-static`所在节点，如上请求将会被转发至`example.com:9100/metrics`。
+其中，`localhost`是`nanoproxy-static`所在节点，如上请求将会被转发至`example.com:9100/metrics`。
+
+## Kubernetes
+
+### Docker
+
+```shell
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/nanoproxy-static-linux-amd64
+docker image build --platform linux/amd64 -t allen88/nanoproxy-static:0.1.0 -f ./Dockerfile .
+docker push allen88/nanoproxy-static:0.1.0
+docker tag allen88/nanoproxy-static:0.1.0 harbor.open.hand-china.com/hskp/nanoproxy-static:0.1.0
+docker push harbor.open.hand-china.com/hskp/nanoproxy-static:0.1.0
+```
+
+### Deployment
+
+```shell
+kubectl apply -f ./Deployment.yml -n istio-test
+```
+
+## Use Case
+
+### 主机监控
+
+原始地址：`example.com:9100/metrics`
+启动命令：`go run main.go --port 9100 --target example.com:9100 --verbose`
+验证命令：`curl localhost:9100/metrics`
+
+
+### 服务监控
+
+原始地址：`example.com:15020/stats/prometheus`
+端口转换：`15020 -> 30654(NodePort)`
+暴露方式：`istio/opentelemetry-javaagent`
+启动命令：`go run main.go --port 15020 --target example.com:30654 --verbose`
+验证命令：`curl localhost:15020/stats/prometheus`

@@ -7,3 +7,19 @@
 	{"commit": "0bb3abc-dirty"}
 2024-07-10T23:27:54.374+0800	INFO	nanoproxy-static	<-- 200 OK -1 map[Content-Encoding:[gzip] Content-Type:[text/plain; version=0.0.4; charset=utf-8] Date:[Wed, 10 Jul 2024 15:27:54 GMT]]
 	{"commit": "0bb3abc-dirty"}
+2024-07-10T23:41:21.639+0800	INFO	nanoproxy-static	--> GET /metrics
+	{"commit": "0bb3abc-dirty"}
+2024-07-10T23:41:21.639+0800	INFO	nanoproxy-static	--> GET http://172.23.16.213:9100/metrics
+	{"commit": "0bb3abc-dirty"}
+2024-07-10T23:41:21.763+0800	INFO	nanoproxy-static	--> map[Accept:[text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7] Accept-Encoding:[gzip, deflate, br, zstd] Accept-Language:[zh-CN,zh;q=0.9,en;q=0.8] Cache-Control:[max-age=0] Host:[172.23.16.213:9100] User-Agent:[Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36]]
+	{"commit": "0bb3abc-dirty"}
+2024-07-10T23:41:21.763+0800	INFO	nanoproxy-static	<-- 200 OK -1 map[Content-Encoding:[gzip] Content-Type:[text/plain; version=0.0.4; charset=utf-8] Date:[Wed, 10 Jul 2024 15:41:21 GMT]]
+	{"commit": "0bb3abc-dirty"}
+2024-07-10T23:41:30.503+0800	INFO	nanoproxy-static	--> GET /metrics
+	{"commit": "0bb3abc-dirty"}
+2024-07-10T23:41:30.503+0800	INFO	nanoproxy-static	--> GET http://172.23.16.213:9100/metrics
+	{"commit": "0bb3abc-dirty"}
+2024-07-10T23:41:30.607+0800	INFO	nanoproxy-static	--> map[Accept:[text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7] Accept-Encoding:[gzip, deflate, br, zstd] Accept-Language:[zh-CN,zh;q=0.9,en;q=0.8] Cache-Control:[max-age=0] Host:[172.23.16.213:9100] User-Agent:[Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36]]
+	{"commit": "0bb3abc-dirty"}
+2024-07-10T23:41:30.607+0800	INFO	nanoproxy-static	<-- 200 OK -1 map[Content-Encoding:[gzip] Content-Type:[text/plain; version=0.0.4; charset=utf-8] Date:[Wed, 10 Jul 2024 15:41:30 GMT]]
+	{"commit": "0bb3abc-dirty"}
