@@ -1,0 +1,2 @@
+{"level":"INFO","time":"2024-07-10T17:40:16.619+0800","message":"Unable to read vcs.revision from binary"}
+{"level":"INFO","time":"2024-07-10T17:40:16.619+0800","logger":"nanoproxy-static","message":"Starting to listen and serve..."}
