@@ -100,6 +100,13 @@ docker push harbor.open.hand-china.com/hskp/nanoproxy-static:0.1.0
 kubectl apply -f ./Deployment.yml -n istio-test
 ```
 
+## Ansible
+
+```shell
+cd bin
+tar czvf nanoproxy-static-linux-amd64-0.1.0.tar.gz nanoproxy-static-linux-amd64 
+```
+
 ## Use Case
 
 ### 主机监控
